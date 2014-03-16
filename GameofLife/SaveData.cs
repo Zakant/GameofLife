@@ -16,6 +16,7 @@ namespace GameofLife
         public int Intervall { get; set; }
         public int Ticks { get; set; }
         public bool Torus { get; set; }
+        public int Mode { get; set; }
 
     }
 }
