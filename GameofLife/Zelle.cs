@@ -25,6 +25,6 @@ namespace GameofLife
     [Serializable()]
     public enum ZellenStatus : byte
     {
-        Lebt, Tot, Whatever
+        Lebt, Tot
     }       
 }
