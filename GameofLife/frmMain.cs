@@ -30,6 +30,7 @@ namespace GameofLife
 
         public void Tick()
         {
+            int living = 0;
             for (int x = 0; x <= zellen.GetUpperBound(0); x++)
             {
                 for (int y = 0; y <= zellen.GetUpperBound(1); y++)
@@ -63,10 +64,12 @@ namespace GameofLife
                 {
                     if (zellen[x, y].Status != zellen[x, y].Aenderung) zellen[x, y].hasChanged = true;
                     zellen[x, y].Status = zellen[x, y].Aenderung;
+                    living += zellen[x, y].Status == ZellenStatus.Lebt ? 1 : 0;
                 }
             }
             ticks++;
             lblTicks.Text = ticks.ToString();
+            lblLivingCells.Text = living.ToString();
             canvas.Refresh();
             if (cbLimit.Checked && ticks >= nupLimit.Value)
             {
@@ -126,11 +129,44 @@ namespace GameofLife
             if (!isGameRunning)
             {
                 PointF p = canvas.getIndex(e.X, e.Y);
-                zellen[(int)p.X, (int)p.Y].Status = zellen[(int)p.X, (int)p.Y].Status == ZellenStatus.Lebt ? ZellenStatus.Tot : ZellenStatus.Lebt;
-                zellen[(int)p.X, (int)p.Y].Aenderung = zellen[(int)p.X, (int)p.Y].Status;
-                zellen[(int)p.X, (int)p.Y].hasChanged = true;
+                Zelle z = zellen[(int)p.X, (int)p.Y];
+                z.Status = z.Status == ZellenStatus.Lebt ? ZellenStatus.Tot : ZellenStatus.Lebt;
+                z.Aenderung = z.Status;
+                z.hasChanged = true;
                 canvas.Refresh();
             }
+        }
+
+        private bool _mousedrag = false;
+        private void canvas_MouseDown(object sender, MouseEventArgs e)
+        {
+            _mousedrag = true;
+        }
+
+        private void canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(!isGameRunning && _mousedrag)
+            {
+                PointF p = canvas.getIndex(e.X, e.Y);
+                Zelle z = zellen[(int)p.X, (int)p.Y];
+                if (z.Status != ZellenStatus.Lebt)
+                {
+                    z.Status = ZellenStatus.Lebt;
+                    z.Aenderung = ZellenStatus.Lebt;
+                    z.hasChanged = true;
+                    canvas.Refresh();
+                }
+            }
+        }
+
+        private void canvas_MouseUp(object sender, MouseEventArgs e)
+        {
+            _mousedrag = false;
+        }
+
+        private void canvas_MouseLeave(object sender, EventArgs e)
+        {
+            _mousedrag = false;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -434,5 +470,6 @@ namespace GameofLife
         }
 
         #endregion
+
     }
 }
