@@ -12,12 +12,30 @@ namespace GameofLife
     public partial class frmStats : Form
     {
 
-        List<StatisticEntry> _stats;
+        private List<StatisticEntry> _stats;
+        private frmMain _host;
 
-        public frmStats(ref List<StatisticEntry> stats)
+        public frmStats(frmMain Host, ref List<StatisticEntry> stats)
         {
+            _host = Host;
             InitializeComponent();
+            _host.NewStatisticValues += _host_NewStatisticValues;
             _stats = stats;
+        }
+
+        void _host_NewStatisticValues()
+        {
+            
+        }
+
+        private void cbAutoScale_CheckedChanged(object sender, EventArgs e)
+        {
+            nupXScale.Enabled = cbAutoScale.Enabled;
+        }
+
+        private void btnResetStats_Click(object sender, EventArgs e)
+        {
+            _stats.Clear();
         }
     }
 }

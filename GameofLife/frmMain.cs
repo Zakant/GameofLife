@@ -398,7 +398,7 @@ namespace GameofLife
         private void btnShowStatistics_Click(object sender, EventArgs e)
         {
             if (_frmstats == null || _frmstats.IsDisposed)
-                _frmstats = new frmStats(ref _stats);
+                _frmstats = new frmStats(this, ref _stats);
             _frmstats.Show();
         }
         #endregion

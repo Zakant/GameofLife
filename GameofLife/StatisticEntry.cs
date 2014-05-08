@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GameofLife
 {
-    class StatisticEntry
+    public class StatisticEntry
     {
 
         public int Generation { get; protected set; }
