@@ -11,21 +11,36 @@ namespace GameofLife
 {
     public partial class frmMain : Form
     {
-        Zelle[,] zellen = new Zelle[0,0];
+
+        public event Action NewStatisticValues;
+
+
+        Zelle[,] zellen = new Zelle[0, 0];
         bool isGameRunning = false;
         bool supressNUPValueChange = false;
         Timer t;
         int ticks = 0;
 
+
+        List<StatisticEntry> _stats = new List<StatisticEntry>();
+
         public frmMain()
         {
 
-            InitializeComponent();            
+            InitializeComponent();
             this.DoubleBuffered = true;
             canvas.Blocks = false;
             UpdateArray();
             canvas.Zellen = zellen;
             canvas.Refresh();
+        }
+
+
+        protected void RaiseNewStatisticValues()
+        {
+            var myevent = NewStatisticValues;
+            if (myevent != null)
+                myevent.Invoke();
         }
 
         public void Tick()
@@ -75,6 +90,11 @@ namespace GameofLife
             {
                 Stop();
             }
+            if (cbEnableStats.Checked)
+            {
+                _stats.Add(new StatisticEntry(ticks, living));
+                RaiseNewStatisticValues();
+            }
         }
 
         #region Update Methoden
@@ -82,7 +102,7 @@ namespace GameofLife
         private static Pen pblack = new Pen(Color.Black, 1f);
         private static Brush bblue = new SolidBrush(Color.Blue);
         private static Brush bwhite = new SolidBrush(Color.White);
-        
+
         private void UpdateArray()
         {
             Zelle[,] temp = new Zelle[(int)nupColums.Value, (int)nupRows.Value];
@@ -145,7 +165,7 @@ namespace GameofLife
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if(!isGameRunning && _mousedrag)
+            if (!isGameRunning && _mousedrag)
             {
                 PointF p = canvas.getIndex(e.X, e.Y);
                 Zelle z = zellen[(int)p.X, (int)p.Y];
@@ -185,7 +205,7 @@ namespace GameofLife
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            Start();  
+            Start();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -243,7 +263,7 @@ namespace GameofLife
                                     sw.Flush();
                                     break;
                             }
-                            
+
                         }
                     }
                     catch (System.IO.IOException)
@@ -355,6 +375,11 @@ namespace GameofLife
             nupLimit.Enabled = cbLimit.Checked;
         }
 
+        private void cbEnableStats_CheckedChanged(object sender, EventArgs e)
+        {
+            btnShowStatistics.Enabled = cbEnableStats.Checked;
+        }
+
         private bool wasminimized = false;
         private void frmMain_Resize(object sender, EventArgs e)
         {
@@ -366,6 +391,12 @@ namespace GameofLife
                 canvas.DrawAll();
                 canvas.Refresh();
             }
+        }
+
+
+        private void btnShowStatistics_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
 
@@ -446,10 +477,10 @@ namespace GameofLife
                 List<Point> points = new List<Point>();
 
                 points.Add(new Point(getLimitNumber(x - 1, xbound), getLimitNumber(y - 1, ybound)));
-                points.Add(new Point(getLimitNumber(x , xbound), getLimitNumber(y - 1, ybound)));
+                points.Add(new Point(getLimitNumber(x, xbound), getLimitNumber(y - 1, ybound)));
                 points.Add(new Point(getLimitNumber(x + 1, xbound), getLimitNumber(y - 1, ybound)));
 
-                points.Add(new Point(getLimitNumber(x - 1, xbound), getLimitNumber(y , ybound)));
+                points.Add(new Point(getLimitNumber(x - 1, xbound), getLimitNumber(y, ybound)));
                 points.Add(new Point(getLimitNumber(x + 1, xbound), getLimitNumber(y, ybound)));
 
                 points.Add(new Point(getLimitNumber(x - 1, xbound), getLimitNumber(y + 1, ybound)));
@@ -464,7 +495,7 @@ namespace GameofLife
 
         private int getLimitNumber(int number, int max)
         {
-            number = number < 0 ? max - number -1: number;
+            number = number < 0 ? max - number - 1 : number;
             number = number > max ? number % (max + 1) : number;
             return number;
         }

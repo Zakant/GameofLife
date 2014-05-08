@@ -55,6 +55,7 @@
             this.lblLivingCells = new System.Windows.Forms.Label();
             this.cbRuleSet = new System.Windows.Forms.ComboBox();
             this.btnShowStatistics = new System.Windows.Forms.Button();
+            this.cbEnableStats = new System.Windows.Forms.CheckBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -87,6 +88,7 @@
             // groupBox1
             // 
             this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.cbEnableStats);
             this.groupBox1.Controls.Add(this.btnShowStatistics);
             this.groupBox1.Controls.Add(this.cbRuleSet);
             this.groupBox1.Controls.Add(this.lblLivingCells);
@@ -409,12 +411,26 @@
             // 
             // btnShowStatistics
             // 
-            this.btnShowStatistics.Location = new System.Drawing.Point(435, 78);
+            this.btnShowStatistics.Location = new System.Drawing.Point(435, 95);
             this.btnShowStatistics.Name = "btnShowStatistics";
             this.btnShowStatistics.Size = new System.Drawing.Size(150, 23);
             this.btnShowStatistics.TabIndex = 23;
             this.btnShowStatistics.Text = "Show Statistics";
             this.btnShowStatistics.UseVisualStyleBackColor = true;
+            this.btnShowStatistics.Click += new System.EventHandler(this.btnShowStatistics_Click);
+            // 
+            // cbEnableStats
+            // 
+            this.cbEnableStats.AutoSize = true;
+            this.cbEnableStats.Checked = true;
+            this.cbEnableStats.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbEnableStats.Location = new System.Drawing.Point(435, 74);
+            this.cbEnableStats.Name = "cbEnableStats";
+            this.cbEnableStats.Size = new System.Drawing.Size(134, 17);
+            this.cbEnableStats.TabIndex = 24;
+            this.cbEnableStats.Text = "Enable statistic logging";
+            this.cbEnableStats.UseVisualStyleBackColor = true;
+            this.cbEnableStats.CheckedChanged += new System.EventHandler(this.cbEnableStats_CheckedChanged);
             // 
             // frmMain
             // 
@@ -471,6 +487,7 @@
         private System.Windows.Forms.ComboBox cbRuleSet;
         private System.Windows.Forms.Label lblLivingCells;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox cbEnableStats;
     }
 }
 
