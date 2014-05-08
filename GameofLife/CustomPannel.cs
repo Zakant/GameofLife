@@ -63,37 +63,40 @@ namespace GameofLife
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            for (int x = 0; x <= Zellen.GetUpperBound(0); x++)
+            if (Zellen != null)
             {
-                for (int y = 0; y <= Zellen.GetUpperBound(1); y++)
+                for (int x = 0; x <= Zellen.GetUpperBound(0); x++)
                 {
-                    if (Zellen[x, y].hasChanged || changedall)
+                    for (int y = 0; y <= Zellen.GetUpperBound(1); y++)
                     {
-                        float xmitte = (float)(x * columsize + columsize / 2);
-                        float ymitte = (float)(y * rowsize + rowsize / 2);
-                        float size = (float)(rowsize > columsize ? columsize : rowsize) - 2;
-                        decimal sizew = columsize - 2;
-                        decimal sizeh = rowsize - 2;
-                        RectangleF r = new RectangleF(xmitte - size / 2, ymitte - size / 2, size, size);
-                        RectangleF rf = new RectangleF(xmitte - (float)sizew / 2, ymitte - (float)sizeh / 2, (float)sizew, (float)sizeh);
+                        if (Zellen[x, y].hasChanged || changedall)
+                        {
+                            float xmitte = (float)(x * columsize + columsize / 2);
+                            float ymitte = (float)(y * rowsize + rowsize / 2);
+                            float size = (float)(rowsize > columsize ? columsize : rowsize) - 2;
+                            decimal sizew = columsize - 2;
+                            decimal sizeh = rowsize - 2;
+                            RectangleF r = new RectangleF(xmitte - size / 2, ymitte - size / 2, size, size);
+                            RectangleF rf = new RectangleF(xmitte - (float)sizew / 2, ymitte - (float)sizeh / 2, (float)sizew, (float)sizeh);
 
-                        Zellen[x, y].hasChanged = false;
-                        if (Zellen[x, y].Status == ZellenStatus.Lebt)
-                        {
-                            if (clearall) g.FillRectangle(bwhite, rf);
-                            if (Blocks) g.FillRectangle(bblue, rf);
-                            else g.FillEllipse(bblue, r);
-                        }
-                        else
-                        {
-                            g.FillRectangle(bwhite, rf);
-                            //g.FillEllipse(bwhite, r);
+                            Zellen[x, y].hasChanged = false;
+                            if (Zellen[x, y].Status == ZellenStatus.Lebt)
+                            {
+                                if (clearall) g.FillRectangle(bwhite, rf);
+                                if (Blocks) g.FillRectangle(bblue, rf);
+                                else g.FillEllipse(bblue, r);
+                            }
+                            else
+                            {
+                                g.FillRectangle(bwhite, rf);
+                                //g.FillEllipse(bwhite, r);
+                            }
                         }
                     }
                 }
+                changedall = false;
+                clearall = false;
             }
-            changedall = false;
-            clearall = false;
         }
 
         protected override void OnSizeChanged(EventArgs e)
