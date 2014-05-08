@@ -50,7 +50,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.nupColums = new System.Windows.Forms.NumericUpDown();
             this.nupRows = new System.Windows.Forms.NumericUpDown();
-            this.canvas = new GameofLife.CustomPanel();
+            this.canvas = new GameofLife.CanvasPanel();
             this.label7 = new System.Windows.Forms.Label();
             this.lblLivingCells = new System.Windows.Forms.Label();
             this.cbRuleSet = new System.Windows.Forms.ComboBox();
@@ -472,7 +472,7 @@
         private System.Windows.Forms.NumericUpDown nupIntervall;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label label2;
-        private CustomPanel canvas;
+        private CanvasPanel canvas;
         private System.Windows.Forms.Button btnResetTicks;
         private System.Windows.Forms.Label lblTicks;
         private System.Windows.Forms.Label label5;

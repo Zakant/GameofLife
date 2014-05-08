@@ -11,9 +11,13 @@ namespace GameofLife
 {
     public partial class frmStats : Form
     {
-        public frmStats()
+
+        List<StatisticEntry> _stats;
+
+        public frmStats(ref List<StatisticEntry> stats)
         {
             InitializeComponent();
+            _stats = stats;
         }
     }
 }

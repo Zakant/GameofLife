@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace GameofLife
 {
-    class CustomPanel : Panel
+    class CanvasPanel : Panel
     {
         private int _colums = 3;
         public int Colums
