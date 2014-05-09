@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 namespace ChartControl
 {
     [Serializable()]
-    public abstract class BaseChartPath<T> : BindingList<T> where T : INotifyPropertyChanged
+    public abstract class BaseChartPath<T> : AdvancedList<T> where T : INotifyPropertyChanged
     {
         public string Name { get; set; }
         public Color Color { get; set; }

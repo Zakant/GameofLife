@@ -20,6 +20,12 @@ namespace GameofLife
             _host = Host;
             InitializeComponent();
             this.DoubleBuffered = true;
+
+            var path = new ChartControl.ChartPath("Test");
+            path.Add(new ChartControl.ChartPoint(1, 10));
+            chart.addPath(path);
+            path.Add(new ChartControl.ChartPoint(2, 20));
+
             _stats = stats;
             _stats.ListChanged += this.HandleListChanged;
             UpdateLabels();

@@ -9,20 +9,23 @@ using System.Collections.ObjectModel;
 
 namespace ChartControl
 {
-    public class Chart : Panel, IBindingList
+    public class Chart : Panel
     {
-        private BindingList<ChartPath> _chartpath = new BindingList<ChartPath>();
-        private BindingList<ChartPathF> _chartpathf = new BindingList<ChartPathF>();
+        private AdvancedList<ChartPath> _chartpath = new AdvancedList<ChartPath>();
+        private AdvancedList<ChartPathF> _chartpathf = new AdvancedList<ChartPathF>();
 
-        private ChartMode mode;
+        [Browsable(true)]
+        public ChartMode Mode { get; set; }
 
-        public Chart(ChartMode mode)
+        public Chart()
         {
-            this.mode = mode;
-            _chartpath.ListChanged += HandleListChanged;
-            _chartpathf.ListChanged += HandleListChanged;
+            Mode = ChartMode.Scrolling;
+            _chartpath.PropertyChanged += HandlePropertyChanged;
+            _chartpathf.PropertyChanged += HandlePropertyChanged;
             this.DoubleBuffered = true;
         }
+
+
 
         #region ChartMethoden
 
@@ -54,7 +57,7 @@ namespace ChartControl
         #endregion
 
         #region EventHandler
-        void HandleListChanged(object sender, ListChangedEventArgs e)
+        void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
         }
 
