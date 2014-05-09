@@ -46,14 +46,9 @@ namespace GameofLife
                 myevent.Invoke();
         }
 
-        private System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-        private System.Diagnostics.Stopwatch sw2 = new System.Diagnostics.Stopwatch();
         public void Tick()
         {
-            sw2.Reset();
-            sw.Reset();
-            sw.Start();
-            sw2.Start();
+            System.Drawing.Region r = new System.Drawing.Region();
             int living = 0;
             var ruleset = ((RuleSet)cbRuleSet.SelectedItem);
             for (int x = 0; x <= zellen.GetUpperBound(0); x++)
@@ -72,6 +67,7 @@ namespace GameofLife
                     {
                         zellen[x, y].hasChanged = true;
                         zellen[x, y].Status = zellen[x, y].Aenderung;
+                        r.Union(canvas.getRectangle(x, y));
                     }
                     living += zellen[x, y].Status == ZellenStatus.Lebt ? 1 : 0;
                 }
@@ -79,8 +75,7 @@ namespace GameofLife
             ticks++;
             lblTicks.Text = ticks.ToString();
             lblLivingCells.Text = living.ToString();
-            sw2.Stop();
-            canvas.Refresh();
+            canvas.Invalidate(r);
             if (cbLimit.Checked && ticks >= nupLimit.Value)
             {
                 Stop();
@@ -90,8 +85,6 @@ namespace GameofLife
                 _stats.Add(new StatisticEntry(ticks, living));
                 RaiseStatisticValuesChanged();
             }
-            sw.Stop();
-            System.Diagnostics.Debug.WriteLine(sw2.ElapsedMilliseconds.ToString() + " - " + sw.ElapsedMilliseconds.ToString());
         }
 
         #region Update Methoden
