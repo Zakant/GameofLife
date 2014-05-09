@@ -34,5 +34,12 @@ namespace ChartControl
         {
             base.OnPaintBackground(e);
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            this.ResumeLayout(false);
+
+        }
     }
 }

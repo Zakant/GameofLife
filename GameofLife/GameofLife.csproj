@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChartControl\ChartControl.csproj">
-      <Project>{fbcc0fd7-04af-43e7-9ea4-2155a721ea3b}</Project>
+      <Project>{770e7113-8716-473e-9464-0d2499b36945}</Project>
       <Name>ChartControl</Name>
     </ProjectReference>
   </ItemGroup>
