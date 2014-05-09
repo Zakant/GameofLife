@@ -5,6 +5,7 @@ using System.Text;
 
 namespace ChartControl
 {
+    [Serializable()]
     class ChartPath
     {
     }

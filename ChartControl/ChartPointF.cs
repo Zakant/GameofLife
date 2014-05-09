@@ -6,6 +6,7 @@ using System.Drawing;
 
 namespace ChartControl
 {
+    [Serializable()]
     class ChartPointF
     {
         public float XValue { get; set; }
