@@ -394,7 +394,7 @@ namespace GameofLife
             _frmstats.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnReloadRuleSets_Click(object sender, EventArgs e)
         {
             LoadRuleSets();
         }
@@ -417,6 +417,7 @@ namespace GameofLife
             cbLimit.Enabled = false;
             nupLimit.Enabled = false;
             cbRuleSet.Enabled = false;
+            btnReloadRuleSets.Enabled = false;
             isGameRunning = true;
 
             this.AcceptButton = btnStop;
@@ -442,6 +443,7 @@ namespace GameofLife
             cbLimit.Enabled = true;
             nupLimit.Enabled = cbLimit.Checked;
             cbRuleSet.Enabled = true;
+            btnReloadRuleSets.Enabled = true;
             isGameRunning = false;
 
             this.AcceptButton = btnStart;

@@ -30,7 +30,6 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.cbEnableStats = new System.Windows.Forms.CheckBox();
             this.btnShowStatistics = new System.Windows.Forms.Button();
             this.cbRuleSet = new System.Windows.Forms.ComboBox();
@@ -57,6 +56,7 @@
             this.nupColums = new System.Windows.Forms.NumericUpDown();
             this.nupRows = new System.Windows.Forms.NumericUpDown();
             this.canvas = new GameofLife.CanvasPanel();
+            this.btnReloadRuleSets = new System.Windows.Forms.Button();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -121,16 +121,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Einstellungen";
-            // 
-            // button1
-            // 
-            this.button1.Image = global::GameofLife.Properties.Resources.refreseh_small;
-            this.button1.Location = new System.Drawing.Point(560, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(25, 25);
-            this.button1.TabIndex = 25;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // cbEnableStats
             // 
@@ -443,13 +433,23 @@
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
+            // btnReloadRuleSets
+            // 
+            this.btnReloadRuleSets.Image = global::GameofLife.Properties.Resources.refreseh_small;
+            this.btnReloadRuleSets.Location = new System.Drawing.Point(560, 48);
+            this.btnReloadRuleSets.Name = "btnReloadRuleSets";
+            this.btnReloadRuleSets.Size = new System.Drawing.Size(25, 25);
+            this.btnReloadRuleSets.TabIndex = 25;
+            this.btnReloadRuleSets.UseVisualStyleBackColor = true;
+            this.btnReloadRuleSets.Click += new System.EventHandler(this.btnReloadRuleSets_Click);
+            // 
             // frmMain
             // 
             this.AcceptButton = this.btnStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(597, 469);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnReloadRuleSets);
             this.Controls.Add(this.splitContainer1);
             this.DoubleBuffered = true;
             this.Name = "frmMain";
@@ -500,7 +500,7 @@
         private System.Windows.Forms.Label lblLivingCells;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox cbEnableStats;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnReloadRuleSets;
     }
 }
 
