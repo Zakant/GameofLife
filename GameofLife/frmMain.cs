@@ -21,13 +21,16 @@ namespace GameofLife
         Timer t;
         int ticks = 0;
 
-
+        System.ComponentModel.BindingList<RuleSet> _rulesets = new System.ComponentModel.BindingList<RuleSet>();
         List<StatisticEntry> _stats = new List<StatisticEntry>();
 
         public frmMain()
         {
 
             InitializeComponent();
+            cbRuleSet.DataSource = _rulesets;
+            cbRuleSet.DisplayMember = "Name";
+            LoadRuleSets();
             this.DoubleBuffered = true;
             canvas.Blocks = false;
             UpdateArray();
@@ -46,31 +49,13 @@ namespace GameofLife
         public void Tick()
         {
             int living = 0;
+            var ruleset = ((RuleSet)cbRuleSet.SelectedItem);
             for (int x = 0; x <= zellen.GetUpperBound(0); x++)
             {
                 for (int y = 0; y <= zellen.GetUpperBound(1); y++)
                 {
                     int neighbours = getLivingNeighbours(x, y);
-                    if (zellen[x, y].Status == ZellenStatus.Lebt)
-                    {
-                        if (neighbours < 2)
-                        {
-                            zellen[x, y].Aenderung = ZellenStatus.Tot;
-                        }
-                        else if (neighbours > 1 && neighbours < 4)
-                        {
-                            zellen[x, y].Aenderung = ZellenStatus.Lebt;
-                        }
-                        else if (neighbours > 3)
-                        {
-                            zellen[x, y].Aenderung = ZellenStatus.Tot;
-                        }
-                    }
-                    else
-                    {
-                        if (neighbours == 3)
-                            zellen[x, y].Aenderung = ZellenStatus.Lebt;
-                    }
+                    zellen[x, y].Aenderung = ruleset.applyRuleset(zellen[x, y].Status, neighbours);
                 }
             }
             for (int x = 0; x <= zellen.GetUpperBound(0); x++)
@@ -199,6 +184,7 @@ namespace GameofLife
                     zellen[x, y].Aenderung = ZellenStatus.Tot;
                 }
             }
+            lblLivingCells.Text = "0";
             canvas.DrawAll();
             canvas.Refresh();
         }
@@ -233,6 +219,7 @@ namespace GameofLife
             data.Intervall = (int)nupIntervall.Value;
             data.Ticks = ticks;
             data.Torus = cbTorus.Checked;
+            data.Guid = ((RuleSet)cbRuleSet.SelectedItem).Guid;
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
                 sfd.AddExtension = true;
@@ -313,6 +300,11 @@ namespace GameofLife
                                     cbTorus.Checked = data.Torus;
                                     ticks = data.Ticks;
                                     lblTicks.Text = ticks.ToString();
+
+                                    if (String.IsNullOrEmpty(data.Guid))
+                                        cbRuleSet.SelectedItem = _rulesets.Select(x => x.Guid == "C99D7E0D-8115-4243-B79B-7758309B0022").First();
+                                    else
+                                        cbRuleSet.SelectedItem = _rulesets.Select(x => x.Guid == data.Guid).First();
 
                                     canvas.DrawAll();
                                     canvas.Refresh();
@@ -401,6 +393,11 @@ namespace GameofLife
                 _frmstats = new frmStats(this, ref _stats);
             _frmstats.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadRuleSets();
+        }
         #endregion
 
         #region Methods
@@ -419,6 +416,7 @@ namespace GameofLife
             cbTorus.Enabled = false;
             cbLimit.Enabled = false;
             nupLimit.Enabled = false;
+            cbRuleSet.Enabled = false;
             isGameRunning = true;
 
             this.AcceptButton = btnStop;
@@ -443,6 +441,7 @@ namespace GameofLife
             cbTorus.Enabled = true;
             cbLimit.Enabled = true;
             nupLimit.Enabled = cbLimit.Checked;
+            cbRuleSet.Enabled = true;
             isGameRunning = false;
 
             this.AcceptButton = btnStart;
@@ -501,6 +500,25 @@ namespace GameofLife
             number = number < 0 ? max - number - 1 : number;
             number = number > max ? number % (max + 1) : number;
             return number;
+        }
+
+        private void LoadRuleSets()
+        {
+            _rulesets.Clear();
+            System.IO.FileInfo[] rules = (new System.IO.DirectoryInfo(".\\Rules")).GetFiles("*.xml", System.IO.SearchOption.TopDirectoryOnly);
+            _rulesets.Add(RuleSet.DefaultSet);
+            foreach (var r in rules)
+            {
+                try
+                {
+                    _rulesets.Add(RuleSet.fromFile(r.FullName));
+                }
+                catch (Exception e)
+                {
+                    Console.Error.WriteLine(e.Message);
+                    Console.Error.WriteLine(e.StackTrace);
+                }
+            }
         }
 
         #endregion

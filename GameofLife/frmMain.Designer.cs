@@ -30,6 +30,12 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.cbEnableStats = new System.Windows.Forms.CheckBox();
+            this.btnShowStatistics = new System.Windows.Forms.Button();
+            this.cbRuleSet = new System.Windows.Forms.ComboBox();
+            this.lblLivingCells = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.cbLimit = new System.Windows.Forms.CheckBox();
             this.nupLimit = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
@@ -51,11 +57,6 @@
             this.nupColums = new System.Windows.Forms.NumericUpDown();
             this.nupRows = new System.Windows.Forms.NumericUpDown();
             this.canvas = new GameofLife.CanvasPanel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblLivingCells = new System.Windows.Forms.Label();
-            this.cbRuleSet = new System.Windows.Forms.ComboBox();
-            this.btnShowStatistics = new System.Windows.Forms.Button();
-            this.cbEnableStats = new System.Windows.Forms.CheckBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -120,6 +121,64 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Einstellungen";
+            // 
+            // button1
+            // 
+            this.button1.Image = global::GameofLife.Properties.Resources.refreseh_small;
+            this.button1.Location = new System.Drawing.Point(560, 48);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(25, 25);
+            this.button1.TabIndex = 25;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // cbEnableStats
+            // 
+            this.cbEnableStats.AutoSize = true;
+            this.cbEnableStats.Enabled = false;
+            this.cbEnableStats.Location = new System.Drawing.Point(435, 74);
+            this.cbEnableStats.Name = "cbEnableStats";
+            this.cbEnableStats.Size = new System.Drawing.Size(134, 17);
+            this.cbEnableStats.TabIndex = 24;
+            this.cbEnableStats.Text = "Enable statistic logging";
+            this.cbEnableStats.UseVisualStyleBackColor = true;
+            this.cbEnableStats.CheckedChanged += new System.EventHandler(this.cbEnableStats_CheckedChanged);
+            // 
+            // btnShowStatistics
+            // 
+            this.btnShowStatistics.Enabled = false;
+            this.btnShowStatistics.Location = new System.Drawing.Point(435, 95);
+            this.btnShowStatistics.Name = "btnShowStatistics";
+            this.btnShowStatistics.Size = new System.Drawing.Size(150, 23);
+            this.btnShowStatistics.TabIndex = 23;
+            this.btnShowStatistics.Text = "Show Statistics";
+            this.btnShowStatistics.UseVisualStyleBackColor = true;
+            this.btnShowStatistics.Click += new System.EventHandler(this.btnShowStatistics_Click);
+            // 
+            // cbRuleSet
+            // 
+            this.cbRuleSet.FormattingEnabled = true;
+            this.cbRuleSet.Location = new System.Drawing.Point(435, 50);
+            this.cbRuleSet.Name = "cbRuleSet";
+            this.cbRuleSet.Size = new System.Drawing.Size(119, 21);
+            this.cbRuleSet.TabIndex = 22;
+            // 
+            // lblLivingCells
+            // 
+            this.lblLivingCells.Location = new System.Drawing.Point(501, 21);
+            this.lblLivingCells.Name = "lblLivingCells";
+            this.lblLivingCells.Size = new System.Drawing.Size(84, 23);
+            this.lblLivingCells.TabIndex = 21;
+            this.lblLivingCells.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(432, 24);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(63, 13);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Living Cells:";
             // 
             // cbLimit
             // 
@@ -384,60 +443,13 @@
             this.canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             this.canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(432, 24);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 13);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "Living Cells:";
-            // 
-            // lblLivingCells
-            // 
-            this.lblLivingCells.Location = new System.Drawing.Point(501, 21);
-            this.lblLivingCells.Name = "lblLivingCells";
-            this.lblLivingCells.Size = new System.Drawing.Size(84, 23);
-            this.lblLivingCells.TabIndex = 21;
-            this.lblLivingCells.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cbRuleSet
-            // 
-            this.cbRuleSet.FormattingEnabled = true;
-            this.cbRuleSet.Location = new System.Drawing.Point(435, 50);
-            this.cbRuleSet.Name = "cbRuleSet";
-            this.cbRuleSet.Size = new System.Drawing.Size(150, 21);
-            this.cbRuleSet.TabIndex = 22;
-            // 
-            // btnShowStatistics
-            // 
-            this.btnShowStatistics.Location = new System.Drawing.Point(435, 95);
-            this.btnShowStatistics.Name = "btnShowStatistics";
-            this.btnShowStatistics.Size = new System.Drawing.Size(150, 23);
-            this.btnShowStatistics.TabIndex = 23;
-            this.btnShowStatistics.Text = "Show Statistics";
-            this.btnShowStatistics.UseVisualStyleBackColor = true;
-            this.btnShowStatistics.Click += new System.EventHandler(this.btnShowStatistics_Click);
-            // 
-            // cbEnableStats
-            // 
-            this.cbEnableStats.AutoSize = true;
-            this.cbEnableStats.Checked = true;
-            this.cbEnableStats.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbEnableStats.Location = new System.Drawing.Point(435, 74);
-            this.cbEnableStats.Name = "cbEnableStats";
-            this.cbEnableStats.Size = new System.Drawing.Size(134, 17);
-            this.cbEnableStats.TabIndex = 24;
-            this.cbEnableStats.Text = "Enable statistic logging";
-            this.cbEnableStats.UseVisualStyleBackColor = true;
-            this.cbEnableStats.CheckedChanged += new System.EventHandler(this.cbEnableStats_CheckedChanged);
-            // 
             // frmMain
             // 
             this.AcceptButton = this.btnStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(597, 469);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.splitContainer1);
             this.DoubleBuffered = true;
             this.Name = "frmMain";
@@ -488,6 +500,7 @@
         private System.Windows.Forms.Label lblLivingCells;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox cbEnableStats;
+        private System.Windows.Forms.Button button1;
     }
 }
 

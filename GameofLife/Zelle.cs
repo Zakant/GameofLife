@@ -21,10 +21,5 @@ namespace GameofLife
 
         public bool hasChanged { get; set; }
 
-    }
-    [Serializable()]
-    public enum ZellenStatus : byte
-    {
-        Lebt, Tot
-    }       
+    }   
 }
