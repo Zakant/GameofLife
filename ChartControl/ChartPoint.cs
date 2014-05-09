@@ -11,17 +11,20 @@ namespace ChartControl
     [Serializable()]
     public class ChartPoint : BasePoint<int>
     {
-
+        public static implicit operator ChartPointF(ChartPoint p)
+        {
+            return new ChartPointF(p.X, p.Y);
+        }
 
         public ChartPoint(Point p)
         {
-            XValue = p.X;
-            YValue = p.Y;
+            X = p.X;
+            Y = p.Y;
         }
         public ChartPoint(int x, int y)
         {
-            XValue = x;
-            YValue = y;
+            X = x;
+            Y = y;
         }
     }
 }

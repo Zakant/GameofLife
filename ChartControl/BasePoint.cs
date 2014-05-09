@@ -17,23 +17,23 @@ namespace ChartControl
                 myevent.Invoke(this, new PropertyChangedEventArgs(propertyname));
             }
         private T _xvalue;
-        public T XValue
+        public T X
         {
             get { return _xvalue; }
             set
             {
                 _xvalue = value;
-                RaiseNotifyPropertyChanged("XValue");
+                RaiseNotifyPropertyChanged("X");
             }
         }
         private T _yvalue;
-        public T YValue
+        public T Y
         {
             get { return _yvalue; }
             set
             {
                 _yvalue = value;
-                RaiseNotifyPropertyChanged("YValue");
+                RaiseNotifyPropertyChanged("Y");
             }
         }
 

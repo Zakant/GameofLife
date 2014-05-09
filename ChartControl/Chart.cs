@@ -5,10 +5,16 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace ChartControl
 {
-    class Chart : Panel 
+    class Chart : Panel
     {
+        
+
+        public Chart()
+        {
+        }
     }
 }

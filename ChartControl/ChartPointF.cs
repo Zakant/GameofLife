@@ -10,15 +10,20 @@ namespace ChartControl
     public class ChartPointF : BasePoint<float>
     {
 
+        public static explicit operator ChartPoint(ChartPointF pf)
+        {
+            return new ChartPoint((int)pf.X, (int)pf.Y);
+        }
+
         public ChartPointF(PointF p)
         {
-            XValue = p.X;
-            YValue = p.Y;
+            X = p.X;
+            Y = p.Y;
         }
         public ChartPointF(float x, float y)
         {
-            XValue = x;
-            YValue = y;
+            X = x;
+            Y = y;
         }
     }
 }
