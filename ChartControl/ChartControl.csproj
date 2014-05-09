@@ -42,7 +42,10 @@
   <ItemGroup>
     <Compile Include="BaseChartPath.cs" />
     <Compile Include="BasePoint.cs" />
-    <Compile Include="Chart.cs" />
+    <Compile Include="Chart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ChartMode.cs" />
     <Compile Include="ChartPath.cs" />
     <Compile Include="ChartPathF.cs" />
     <Compile Include="ChartPoint.cs" />

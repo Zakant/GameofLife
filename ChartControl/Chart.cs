@@ -14,8 +14,11 @@ namespace ChartControl
         private BindingList<ChartPath> _chartpath = new BindingList<ChartPath>();
         private BindingList<ChartPathF> _chartpathf = new BindingList<ChartPathF>();
 
-        public Chart()
+        private ChartMode mode;
+
+        public Chart(ChartMode mode)
         {
+            this.mode = mode;
             _chartpath.ListChanged += HandleListChanged;
             _chartpathf.ListChanged += HandleListChanged;
             this.DoubleBuffered = true;
