@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.ComponentModel;
-using System.ComponentModel;
 
 namespace ChartControl
 {
