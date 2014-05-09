@@ -6,23 +6,20 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace GameofLife
 {
     public partial class frmMain : Form
     {
-
-        public event Action StatisticValuesChanged;
-
-
         Zelle[,] zellen = new Zelle[0, 0];
         bool isGameRunning = false;
         bool supressNUPValueChange = false;
         Timer t;
         int ticks = 0;
 
-        System.ComponentModel.BindingList<RuleSet> _rulesets = new System.ComponentModel.BindingList<RuleSet>();
-        List<StatisticEntry> _stats = new List<StatisticEntry>();
+        BindingList<RuleSet> _rulesets = new BindingList<RuleSet>();
+        BindingList<StatisticEntry> _stats = new BindingList<StatisticEntry>();
 
         public frmMain()
         {
@@ -36,14 +33,6 @@ namespace GameofLife
             UpdateArray();
             canvas.Zellen = zellen;
             canvas.Refresh();
-        }
-
-
-        protected void RaiseStatisticValuesChanged()
-        {
-            var myevent = StatisticValuesChanged;
-            if (myevent != null)
-                myevent.Invoke();
         }
 
         public void Tick()
@@ -83,7 +72,6 @@ namespace GameofLife
             if (cbEnableStats.Checked)
             {
                 _stats.Add(new StatisticEntry(ticks, living));
-                RaiseStatisticValuesChanged();
             }
         }
 
@@ -190,6 +178,7 @@ namespace GameofLife
                 }
             }
             lblLivingCells.Text = "0";
+            _stats.Clear();
             canvas.DrawAll();
             canvas.Refresh();
         }

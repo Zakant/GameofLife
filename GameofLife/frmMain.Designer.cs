@@ -125,7 +125,6 @@
             // cbEnableStats
             // 
             this.cbEnableStats.AutoSize = true;
-            this.cbEnableStats.Enabled = false;
             this.cbEnableStats.Location = new System.Drawing.Point(435, 74);
             this.cbEnableStats.Name = "cbEnableStats";
             this.cbEnableStats.Size = new System.Drawing.Size(134, 17);
@@ -136,7 +135,6 @@
             // 
             // btnShowStatistics
             // 
-            this.btnShowStatistics.Enabled = false;
             this.btnShowStatistics.Location = new System.Drawing.Point(435, 95);
             this.btnShowStatistics.Name = "btnShowStatistics";
             this.btnShowStatistics.Size = new System.Drawing.Size(150, 23);
