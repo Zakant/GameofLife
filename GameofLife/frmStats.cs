@@ -19,7 +19,7 @@ namespace GameofLife
         {
             _host = Host;
             InitializeComponent();
-            _host.NewStatisticValues += _host_NewStatisticValues;
+            _host.StatisticValuesChanged += _host_NewStatisticValues;
             _stats = stats;
         }
 

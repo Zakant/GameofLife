@@ -12,7 +12,7 @@ namespace GameofLife
     public partial class frmMain : Form
     {
 
-        public event Action NewStatisticValues;
+        public event Action StatisticValuesChanged;
 
 
         Zelle[,] zellen = new Zelle[0, 0];
@@ -39,31 +39,37 @@ namespace GameofLife
         }
 
 
-        protected void RaiseNewStatisticValues()
+        protected void RaiseStatisticValuesChanged()
         {
-            var myevent = NewStatisticValues;
+            var myevent = StatisticValuesChanged;
             if (myevent != null)
                 myevent.Invoke();
         }
 
+        private System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
         public void Tick()
         {
+            sw.Reset();
+            sw.Start();
             int living = 0;
             var ruleset = ((RuleSet)cbRuleSet.SelectedItem);
+
             for (int x = 0; x <= zellen.GetUpperBound(0); x++)
             {
                 for (int y = 0; y <= zellen.GetUpperBound(1); y++)
                 {
-                    int neighbours = getLivingNeighbours(x, y);
-                    zellen[x, y].Aenderung = ruleset.applyRuleset(zellen[x, y].Status, neighbours);
+                    zellen[x, y].Aenderung = ruleset.applyRuleset(zellen[x, y].Status, getLivingNeighbours(x, y));
                 }
             }
             for (int x = 0; x <= zellen.GetUpperBound(0); x++)
             {
                 for (int y = 0; y <= zellen.GetUpperBound(1); y++)
                 {
-                    if (zellen[x, y].Status != zellen[x, y].Aenderung) zellen[x, y].hasChanged = true;
-                    zellen[x, y].Status = zellen[x, y].Aenderung;
+                    if (zellen[x, y].Status != zellen[x, y].Aenderung)
+                    {
+                        zellen[x, y].hasChanged = true;
+                        zellen[x, y].Status = zellen[x, y].Aenderung;
+                    }
                     living += zellen[x, y].Status == ZellenStatus.Lebt ? 1 : 0;
                 }
             }
@@ -78,8 +84,10 @@ namespace GameofLife
             if (cbEnableStats.Checked)
             {
                 _stats.Add(new StatisticEntry(ticks, living));
-                RaiseNewStatisticValues();
+                RaiseStatisticValuesChanged();
             }
+            sw.Stop();
+            System.Diagnostics.Debug.WriteLine(sw.ElapsedMilliseconds.ToString());
         }
 
         #region Update Methoden
@@ -419,7 +427,6 @@ namespace GameofLife
             cbRuleSet.Enabled = false;
             btnReloadRuleSets.Enabled = false;
             isGameRunning = true;
-
             this.AcceptButton = btnStop;
 
             t = new Timer();
