@@ -12,6 +12,7 @@ namespace ChartControl
         public ChartPath(string name)
         {
             this.Name = name;
+            this.Color = Color.Black;
         }
         public ChartPath(string name, Color color)
         {
