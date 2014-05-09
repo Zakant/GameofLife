@@ -40,6 +40,8 @@
             this.cbAutoScale = new System.Windows.Forms.CheckBox();
             this.nupXScale = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.chart = new ChartControl.Chart();
+            this.pnlChart.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupXScale)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +51,7 @@
             this.pnlChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlChart.Controls.Add(this.chart);
             this.pnlChart.Location = new System.Drawing.Point(12, 12);
             this.pnlChart.Name = "pnlChart";
             this.pnlChart.Size = new System.Drawing.Size(462, 297);
@@ -172,6 +175,15 @@
             this.label1.Text = "X Scale:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // chart
+            // 
+            this.chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chart.Location = new System.Drawing.Point(0, 0);
+            this.chart.Mode = ChartControl.ChartMode.Scrolling;
+            this.chart.Name = "chart";
+            this.chart.Size = new System.Drawing.Size(462, 297);
+            this.chart.TabIndex = 0;
+            // 
             // frmStats
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -181,6 +193,7 @@
             this.Controls.Add(this.pnlChart);
             this.Name = "frmStats";
             this.Text = "Statistics";
+            this.pnlChart.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupXScale)).EndInit();
@@ -202,5 +215,6 @@
         private System.Windows.Forms.Label lblMaximum;
         private System.Windows.Forms.Label lblAverage;
         private System.Windows.Forms.Label label4;
+        private ChartControl.Chart chart;
     }
 }
