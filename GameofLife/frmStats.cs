@@ -12,21 +12,60 @@ namespace GameofLife
     public partial class frmStats : Form
     {
 
-        private List<StatisticEntry> _stats;
+        private BindingList<StatisticEntry> _stats;
         private frmMain _host;
 
-        public frmStats(frmMain Host, ref List<StatisticEntry> stats)
+        public frmStats(frmMain Host, ref BindingList<StatisticEntry> stats)
         {
             _host = Host;
             InitializeComponent();
-            _host.StatisticValuesChanged += _host_NewStatisticValues;
+            this.DoubleBuffered = true;
             _stats = stats;
+            _stats.ListChanged += this.HandleListChanged;
+            UpdateLabels();
         }
 
-        void _host_NewStatisticValues()
+        protected void UpdateLabels()
         {
-            
+            if (lblAverage.InvokeRequired)
+            {
+                this.Invoke(new Action(() =>
+                    {
+                        lblAverage.Text = _average.ToString();
+                        lblMaximum.Text = _max.ToString();
+                        lblMinimum.Text = _min.ToString();
+                    }));
+            }
+            else
+            {
+                lblAverage.Text = _average.ToString();
+                lblMaximum.Text = _max.ToString();
+                lblMinimum.Text = _min.ToString();
+            }
+
         }
+
+        private double _average = 0.0d;
+        private int _max = 0;
+        private int _min = 0;
+        protected void HandleListChanged(object sender, System.ComponentModel.ListChangedEventArgs e)
+        {
+            if (_stats.Count > 0)
+            {
+                _average = Math.Round((float)_stats.Sum(x => x.LivingCells) / _stats.Count, 3);
+                _max = _stats.Max(x => x.LivingCells);
+                _min = _stats.Min(x => x.LivingCells);
+            }
+            else
+            {
+                _average = 0.0d;
+                _max = 0;
+                _min = 0;
+            }
+            UpdateLabels();
+
+        }
+
 
         private void cbAutoScale_CheckedChanged(object sender, EventArgs e)
         {
@@ -37,5 +76,6 @@ namespace GameofLife
         {
             _stats.Clear();
         }
+
     }
 }

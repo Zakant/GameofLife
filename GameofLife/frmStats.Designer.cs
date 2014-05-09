@@ -30,10 +30,16 @@
         {
             this.pnlChart = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nupXScale = new System.Windows.Forms.NumericUpDown();
-            this.cbAutoScale = new System.Windows.Forms.CheckBox();
+            this.lblMinimum = new System.Windows.Forms.Label();
+            this.lblMaximum = new System.Windows.Forms.Label();
+            this.lblAverage = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnResetStats = new System.Windows.Forms.Button();
+            this.cbAutoScale = new System.Windows.Forms.CheckBox();
+            this.nupXScale = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupXScale)).BeginInit();
             this.SuspendLayout();
@@ -52,6 +58,12 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.lblMinimum);
+            this.groupBox1.Controls.Add(this.lblMaximum);
+            this.groupBox1.Controls.Add(this.lblAverage);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.btnResetStats);
             this.groupBox1.Controls.Add(this.cbAutoScale);
             this.groupBox1.Controls.Add(this.nupXScale);
@@ -63,15 +75,80 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Einstellungen";
             // 
-            // label1
+            // lblMinimum
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "X Scale:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMinimum.Location = new System.Drawing.Point(326, 60);
+            this.lblMinimum.Name = "lblMinimum";
+            this.lblMinimum.Size = new System.Drawing.Size(130, 13);
+            this.lblMinimum.TabIndex = 9;
+            this.lblMinimum.Text = "label7";
+            this.lblMinimum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblMaximum
+            // 
+            this.lblMaximum.Location = new System.Drawing.Point(327, 41);
+            this.lblMaximum.Name = "lblMaximum";
+            this.lblMaximum.Size = new System.Drawing.Size(129, 13);
+            this.lblMaximum.TabIndex = 8;
+            this.lblMaximum.Text = "label6";
+            this.lblMaximum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblAverage
+            // 
+            this.lblAverage.Location = new System.Drawing.Point(323, 21);
+            this.lblAverage.Name = "lblAverage";
+            this.lblAverage.Size = new System.Drawing.Size(133, 13);
+            this.lblAverage.TabIndex = 7;
+            this.lblAverage.Text = "label5";
+            this.lblAverage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(211, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(107, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Minimum Living Cells:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(211, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(110, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Maximum Living Cells:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(211, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(106, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Average Living Cells:";
+            // 
+            // btnResetStats
+            // 
+            this.btnResetStats.Location = new System.Drawing.Point(103, 41);
+            this.btnResetStats.Name = "btnResetStats";
+            this.btnResetStats.Size = new System.Drawing.Size(102, 32);
+            this.btnResetStats.TabIndex = 3;
+            this.btnResetStats.Text = "Reset Statistics";
+            this.btnResetStats.UseVisualStyleBackColor = true;
+            this.btnResetStats.Click += new System.EventHandler(this.btnResetStats_Click);
+            // 
+            // cbAutoScale
+            // 
+            this.cbAutoScale.AutoSize = true;
+            this.cbAutoScale.Location = new System.Drawing.Point(9, 45);
+            this.cbAutoScale.Name = "cbAutoScale";
+            this.cbAutoScale.Size = new System.Drawing.Size(88, 17);
+            this.cbAutoScale.TabIndex = 2;
+            this.cbAutoScale.Text = "Auto X Scale";
+            this.cbAutoScale.UseVisualStyleBackColor = true;
+            this.cbAutoScale.CheckedChanged += new System.EventHandler(this.cbAutoScale_CheckedChanged);
             // 
             // nupXScale
             // 
@@ -85,26 +162,15 @@
             this.nupXScale.Size = new System.Drawing.Size(120, 20);
             this.nupXScale.TabIndex = 1;
             // 
-            // cbAutoScale
+            // label1
             // 
-            this.cbAutoScale.AutoSize = true;
-            this.cbAutoScale.Location = new System.Drawing.Point(9, 45);
-            this.cbAutoScale.Name = "cbAutoScale";
-            this.cbAutoScale.Size = new System.Drawing.Size(88, 17);
-            this.cbAutoScale.TabIndex = 2;
-            this.cbAutoScale.Text = "Auto X Scale";
-            this.cbAutoScale.UseVisualStyleBackColor = true;
-            this.cbAutoScale.CheckedChanged += new System.EventHandler(this.cbAutoScale_CheckedChanged);
-            // 
-            // btnResetStats
-            // 
-            this.btnResetStats.Location = new System.Drawing.Point(354, 19);
-            this.btnResetStats.Name = "btnResetStats";
-            this.btnResetStats.Size = new System.Drawing.Size(102, 23);
-            this.btnResetStats.TabIndex = 3;
-            this.btnResetStats.Text = "Reset Statistics";
-            this.btnResetStats.UseVisualStyleBackColor = true;
-            this.btnResetStats.Click += new System.EventHandler(this.btnResetStats_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "X Scale:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmStats
             // 
@@ -130,5 +196,11 @@
         private System.Windows.Forms.CheckBox cbAutoScale;
         private System.Windows.Forms.NumericUpDown nupXScale;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblMinimum;
+        private System.Windows.Forms.Label lblMaximum;
+        private System.Windows.Forms.Label lblAverage;
+        private System.Windows.Forms.Label label4;
     }
 }
