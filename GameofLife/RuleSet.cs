@@ -72,21 +72,38 @@ namespace GameofLife
             var rules = root.SelectSingleNode("./rules");
             foreach (XmlNode rule in rules.SelectNodes("./rule"))
             {
-                int lboarder = Int32.Parse(rule.Attributes["Neighbours-From"].Value.Trim());
-                int uboarder = Int32.Parse(rule.Attributes["Neighbours-To"].Value.Trim());
                 var n = parseZellenStatus(rule.Attributes["NewStatus"].Value.Trim());
-                for (int i = lboarder; i <= uboarder; i++)
+                if (rule.Attributes["Neighbours"] != null)
                 {
+                    int neighbours = Int32.Parse(rule.Attributes["Neighbours"].Value.Trim());
                     if (rule.Attributes["CurrentStatus"] == null)
                     {
-                        livingstatus[i] = n;
-                        deadstatus[i] = n;
+                        livingstatus[neighbours] = n;
+                        deadstatus[neighbours] = n;
                     }
                     else
                         if (parseZellenStatus(rule.Attributes["CurrentStatus"].Value.Trim()) == ZellenStatus.Lebt)
-                            livingstatus[i] = n;
+                            livingstatus[neighbours] = n;
                         else
+                            deadstatus[neighbours] = n;
+                }
+                else
+                {
+                    int lboarder = Int32.Parse(rule.Attributes["Neighbours-From"].Value.Trim());
+                    int uboarder = Int32.Parse(rule.Attributes["Neighbours-To"].Value.Trim());
+                    for (int i = lboarder; i <= uboarder; i++)
+                    {
+                        if (rule.Attributes["CurrentStatus"] == null)
+                        {
+                            livingstatus[i] = n;
                             deadstatus[i] = n;
+                        }
+                        else
+                            if (parseZellenStatus(rule.Attributes["CurrentStatus"].Value.Trim()) == ZellenStatus.Lebt)
+                                livingstatus[i] = n;
+                            else
+                                deadstatus[i] = n;
+                    }
                 }
             }
         }
