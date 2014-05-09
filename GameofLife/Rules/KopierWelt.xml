@@ -6,13 +6,13 @@
   <link>http://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens</link>
   <guid>59CD2AA0-CB77-4FD7-8D6E-E82BE1DE250E</guid>
   <rules>
-    <rule Neighbours-From="0" Neighbours-To="0" NewStatus="Tot" />
-    <rule Neighbours-From="2" Neighbours-To="2" NewStatus="Tot" />
-    <rule Neighbours-From="4" Neighbours-To="4" NewStatus="Tot" />
-    <rule Neighbours-From="6" Neighbours-To="6" NewStatus="Tot" />
-    <rule Neighbours-From="1" Neighbours-To="1" NewStatus="Lebt" />
-    <rule Neighbours-From="3" Neighbours-To="3" NewStatus="Lebt" />
-    <rule Neighbours-From="5" Neighbours-To="5" NewStatus="Lebt" />
-    <rule Neighbours-From="7" Neighbours-To="7" NewStatus="Lebt" />
+    <rule Neighbours="0" NewStatus="Tot" />
+    <rule Neighbours="2" NewStatus="Tot" />
+    <rule Neighbours="4" NewStatus="Tot" />
+    <rule Neighbours="6" NewStatus="Tot" />
+    <rule Neighbours="1" NewStatus="Lebt" />
+    <rule Neighbours="3" NewStatus="Lebt" />
+    <rule Neighbours="5" NewStatus="Lebt" />
+    <rule Neighbours="7" NewStatus="Lebt" />
   </rules>
 </ruleset>
