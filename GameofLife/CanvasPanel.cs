@@ -47,7 +47,7 @@ namespace GameofLife
                 Rows = Rows == 0 ? 3 : Rows;
                 Colums = Colums == 0 ? 3 : Colums;
                 columsize = (decimal)rec.Width / Colums;
-                rowsize = (decimal)rec.Height  / Rows;
+                rowsize = (decimal)rec.Height / Rows;
                 for (int c = 0; c <= Colums; c++)
                 {
                     g.DrawLine(pblack, (float)(c * columsize), 0, (float)(c * columsize), rec.Height);
@@ -59,7 +59,8 @@ namespace GameofLife
                 backgrounddraw = false;
             }
         }
-        
+
+
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -115,7 +116,16 @@ namespace GameofLife
 
         public PointF getIndex(int x, int y)
         {
-            return new PointF((float)(x / columsize),(float)( y / rowsize));
+            return new PointF((float)(x / columsize), (float)(y / rowsize));
+        }
+
+        public RectangleF getRectangle(int x, int y)
+        {
+            float xmitte = (float)(x * columsize + columsize / 2);
+            float ymitte = (float)(y * rowsize + rowsize / 2);
+            decimal sizew = columsize;
+            decimal sizeh = rowsize;
+            return new RectangleF(xmitte - (float)sizew / 2, ymitte - (float)sizeh / 2, (float)sizew, (float)sizeh);
         }
 
         public void DrawAll()
