@@ -6,7 +6,7 @@ using System.Text;
 namespace ChartControl
 {
     [Serializable()]
-    class ChartPathF
+    public class ChartPathF : BaseChartPath<ChartPointF>
     {
     }
 }

@@ -7,10 +7,8 @@ using System.Drawing;
 namespace ChartControl
 {
     [Serializable()]
-    class ChartPointF
+    public class ChartPointF : BasePoint<float>
     {
-        public float XValue { get; set; }
-        public float YValue { get; set; }
 
         public ChartPointF(PointF p)
         {

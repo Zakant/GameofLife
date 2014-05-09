@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseChartPath.cs" />
+    <Compile Include="BasePoint.cs" />
     <Compile Include="Chart.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.ComponentModel;
+using System.ComponentModel;
 
 namespace ChartControl
 {
     [Serializable()]
-    class ChartPoint
+    public class ChartPoint : BasePoint<int>
     {
-        public int XValue { get; set; }
-        public int YValue { get; set; }
+
 
         public ChartPoint(Point p)
         {
