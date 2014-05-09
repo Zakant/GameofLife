@@ -93,14 +93,7 @@ namespace GameofLife
 
         public ZellenStatus applyRuleset(ZellenStatus currentstatus, int livingneighbours)
         {
-            if (currentstatus == ZellenStatus.Lebt)
-            {
-                return livingstatus[livingneighbours];
-            }
-            else
-            {
-                return deadstatus[livingneighbours];
-            }
+            return currentstatus == ZellenStatus.Lebt ? livingstatus[livingneighbours] : deadstatus[livingneighbours];
         }
 
         protected ZellenStatus parseZellenStatus(string s)
