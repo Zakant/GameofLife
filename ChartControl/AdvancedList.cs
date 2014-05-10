@@ -70,6 +70,11 @@ namespace ChartControl
             RaisePropertyChangedEvent(this, "RemoveRange");
         }
 
+        public new void Clear()
+        {
+            base.Clear();
+            RaisePropertyChangedEvent(this, "Clear");
+        }
 
     }
 }

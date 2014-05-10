@@ -65,13 +65,19 @@ namespace ChartControl
 
         #endregion
 
+        private System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+
         #region EventHandler
         void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            sw.Reset();
+            sw.Start();
             CalculateYBoarder();
             CalculateMargins();
             UpdateData();
             this.Refresh();
+            sw.Stop();
+            System.Diagnostics.Debug.WriteLine(sw.ElapsedMilliseconds);
         }
 
 

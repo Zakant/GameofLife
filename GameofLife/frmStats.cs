@@ -106,6 +106,7 @@ namespace GameofLife
             averagepath.Clear();
             minpath.Clear();
             maxpath.Clear();
+            this.Refresh();
         }
 
         private void nupXScale_ValueChanged(object sender, EventArgs e)
