@@ -15,6 +15,11 @@ namespace ChartControl
             return new ChartPoint((int)pf.X, (int)pf.Y);
         }
 
+        public static implicit operator PointF(ChartPointF pf)
+        {
+            return new PointF(pf.X, pf.Y);
+        }
+
         public ChartPointF(PointF p)
         {
             X = p.X;

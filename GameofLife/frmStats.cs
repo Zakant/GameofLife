@@ -15,16 +15,25 @@ namespace GameofLife
         private BindingList<StatisticEntry> _stats;
         private frmMain _host;
 
+        private ChartControl.ChartPathF datapath;
+        private ChartControl.ChartPathF maxpath;
+        private ChartControl.ChartPathF minpath;
+        private ChartControl.ChartPathF averagepath;
+
         public frmStats(frmMain Host, ref BindingList<StatisticEntry> stats)
         {
             _host = Host;
             InitializeComponent();
             this.DoubleBuffered = true;
 
-            var path = new ChartControl.ChartPath("Test");
-            path.Add(new ChartControl.ChartPoint(1, 10));
-            chart.addPath(path);
-            path.Add(new ChartControl.ChartPoint(2, 20));
+            datapath = new ChartControl.ChartPathF("Test");
+            maxpath = new ChartControl.ChartPathF("Max", Color.Red);
+            minpath = new ChartControl.ChartPathF("Min", Color.Blue);
+            averagepath = new ChartControl.ChartPathF("Average", Color.Green);
+            chart.addPath(datapath);
+            chart.addPath(maxpath);
+            chart.addPath(minpath);
+            chart.addPath(averagepath);
 
             _stats = stats;
             _stats.ListChanged += this.HandleListChanged;
@@ -51,22 +60,27 @@ namespace GameofLife
 
         }
 
-        private double _average = 0.0d;
+        private float _average = 0.0f;
         private int _max = 0;
         private int _min = 0;
         protected void HandleListChanged(object sender, System.ComponentModel.ListChangedEventArgs e)
         {
             if (_stats.Count > 0)
             {
-                _average = Math.Round((float)_stats.Sum(x => x.LivingCells) / _stats.Count, 3);
+                _average = (float)Math.Round((float)_stats.Sum(x => x.LivingCells) / _stats.Count, 3);
                 _max = _stats.Max(x => x.LivingCells);
                 _min = _stats.Min(x => x.LivingCells);
+                datapath.Add(new ChartControl.ChartPointF(_stats[e.NewIndex].Generation, _stats[e.NewIndex].LivingCells));
+                //maxpath.Add(new ChartControl.ChartPointF(_stats[e.NewIndex].Generation, _max));
+                //minpath.Add(new ChartControl.ChartPointF(_stats[e.NewIndex].Generation, _min));
+                averagepath.Add(new ChartControl.ChartPointF(_stats[e.NewIndex].Generation, _average));
             }
             else
             {
-                _average = 0.0d;
+                _average = 0.0f;
                 _max = 0;
                 _min = 0;
+                datapath.Clear();
             }
             UpdateLabels();
 
