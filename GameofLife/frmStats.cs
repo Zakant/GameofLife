@@ -89,12 +89,13 @@ namespace GameofLife
 
         private void cbAutoScale_CheckedChanged(object sender, EventArgs e)
         {
-            nupXScale.Enabled = cbAutoScale.Enabled;
-            chart.AutoAdjusting = cbAutoScale.Enabled;
-            if(cbAutoScale.Enabled)
+            nupXScale.Enabled = !cbAutoScale.Checked;
+            chart.AutoAdjusting = cbAutoScale.Checked;
+            if (!cbAutoScale.Checked)
             {
                 chart.XValues = (int)nupXScale.Value;
             }
+            chart.UpdateXValues();
             chart.Refresh();
         }
 
@@ -110,6 +111,7 @@ namespace GameofLife
         private void nupXScale_ValueChanged(object sender, EventArgs e)
         {
             chart.XValues = (int)nupXScale.Value;
+            chart.UpdateXValues();
             chart.Refresh();
         }
 

@@ -40,8 +40,8 @@
             this.cbAutoScale = new System.Windows.Forms.CheckBox();
             this.nupXScale = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.chart = new ChartControl.Chart();
             this.btnSet = new System.Windows.Forms.Button();
+            this.chart = new ChartControl.Chart();
             this.pnlChart.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupXScale)).BeginInit();
@@ -138,7 +138,7 @@
             // 
             this.btnResetStats.Location = new System.Drawing.Point(103, 41);
             this.btnResetStats.Name = "btnResetStats";
-            this.btnResetStats.Size = new System.Drawing.Size(125, 32);
+            this.btnResetStats.Size = new System.Drawing.Size(130, 32);
             this.btnResetStats.TabIndex = 3;
             this.btnResetStats.Text = "Reset Statistics";
             this.btnResetStats.UseVisualStyleBackColor = true;
@@ -159,7 +159,7 @@
             // 
             // nupXScale
             // 
-            this.nupXScale.Location = new System.Drawing.Point(59, 19);
+            this.nupXScale.Location = new System.Drawing.Point(64, 19);
             this.nupXScale.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -180,10 +180,19 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "X Scale:";
+            this.label1.Text = "X Values:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSet
+            // 
+            this.btnSet.Location = new System.Drawing.Point(190, 16);
+            this.btnSet.Name = "btnSet";
+            this.btnSet.Size = new System.Drawing.Size(43, 23);
+            this.btnSet.TabIndex = 10;
+            this.btnSet.Text = "Set";
+            this.btnSet.UseVisualStyleBackColor = true;
             // 
             // chart
             // 
@@ -194,16 +203,8 @@
             this.chart.Name = "chart";
             this.chart.Size = new System.Drawing.Size(462, 297);
             this.chart.TabIndex = 0;
+            this.chart.ValueMargin = 2;
             this.chart.XValues = 211;
-            // 
-            // btnSet
-            // 
-            this.btnSet.Location = new System.Drawing.Point(185, 16);
-            this.btnSet.Name = "btnSet";
-            this.btnSet.Size = new System.Drawing.Size(43, 23);
-            this.btnSet.TabIndex = 10;
-            this.btnSet.Text = "Set";
-            this.btnSet.UseVisualStyleBackColor = true;
             // 
             // frmStats
             // 

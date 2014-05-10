@@ -31,15 +31,15 @@ namespace ChartControl
         public int XValues { get; set; }
 
         [Browsable(true)]
-        public float ValueMargin { get; set; }
+        public int ValueMargin { get; set; }
 
         public Chart()
         {
             Mode = ChartMode.Scrolling;
             ValueMargin = 2;
             AutoAdjusting = true;
-            if (AutoAdjusting)
-                XValues = (int)((this.Size.Width - leftmargin - rightmargin) / ValueMargin);
+            CalculateMargins();
+            UpdateXValues();
             _chartpaths.PropertyChanged += HandlePropertyChanged;
             this.DoubleBuffered = true;
         }
@@ -77,8 +77,7 @@ namespace ChartControl
 
         protected override void OnSizeChanged(EventArgs e)
         {
-            if (AutoAdjusting)
-                XValues = (int)((this.Size.Width - leftmargin - rightmargin) / ValueMargin);
+            UpdateXValues();
             CalculateYBoarder();
             base.OnSizeChanged(e);
         }
@@ -112,6 +111,20 @@ namespace ChartControl
         }
 
 
+        public void UpdateXValues()
+        {
+            if (AutoAdjusting)
+            {
+                ValueMargin = 2;
+                XValues = (int)((this.Size.Width - leftmargin - rightmargin) / ValueMargin);
+            }
+            else
+            {
+                ValueMargin = (int)((this.Size.Width - leftmargin - rightmargin) / XValues);
+            }
+
+        }
+
         protected void CalculateMargins()
         {
             using (System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(new Bitmap(1, 1)))
@@ -119,6 +132,7 @@ namespace ChartControl
                 SizeF size = graphics.MeasureString(yboarder.ToString(), f);
                 leftmargin = (int)(3 + size.Width + 3);
             }
+            UpdateXValues();
         }
 
         private DataEntry[] _data = new DataEntry[0];

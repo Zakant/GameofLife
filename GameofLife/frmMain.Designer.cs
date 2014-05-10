@@ -125,6 +125,8 @@
             // cbEnableStats
             // 
             this.cbEnableStats.AutoSize = true;
+            this.cbEnableStats.Checked = true;
+            this.cbEnableStats.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbEnableStats.Location = new System.Drawing.Point(435, 74);
             this.cbEnableStats.Name = "cbEnableStats";
             this.cbEnableStats.Size = new System.Drawing.Size(134, 17);
