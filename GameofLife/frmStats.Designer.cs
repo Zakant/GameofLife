@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlChart = new System.Windows.Forms.Panel();
+            this.chart = new ChartControl.Chart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblMinimum = new System.Windows.Forms.Label();
             this.lblMaximum = new System.Windows.Forms.Label();
@@ -40,7 +41,6 @@
             this.cbAutoScale = new System.Windows.Forms.CheckBox();
             this.nupXScale = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.chart = new ChartControl.Chart();
             this.pnlChart.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nupXScale)).BeginInit();
@@ -56,6 +56,18 @@
             this.pnlChart.Name = "pnlChart";
             this.pnlChart.Size = new System.Drawing.Size(462, 297);
             this.pnlChart.TabIndex = 0;
+            // 
+            // chart
+            // 
+            this.chart.AutoAdjusting = true;
+            this.chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chart.Location = new System.Drawing.Point(0, 0);
+            this.chart.Mode = ChartControl.ChartMode.Scrolling;
+            this.chart.Name = "chart";
+            this.chart.Size = new System.Drawing.Size(462, 297);
+            this.chart.TabIndex = 0;
+            this.chart.ValueMargin = 2F;
+            this.chart.XValues = 213;
             // 
             // groupBox1
             // 
@@ -187,18 +199,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "X Values:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // chart
-            // 
-            this.chart.AutoAdjusting = true;
-            this.chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chart.Location = new System.Drawing.Point(0, 0);
-            this.chart.Mode = ChartControl.ChartMode.Scrolling;
-            this.chart.Name = "chart";
-            this.chart.Size = new System.Drawing.Size(462, 297);
-            this.chart.TabIndex = 0;
-            this.chart.ValueMargin = 2F;
-            this.chart.XValues = 211;
             // 
             // frmStats
             // 
