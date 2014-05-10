@@ -40,7 +40,6 @@
             this.cbAutoScale = new System.Windows.Forms.CheckBox();
             this.nupXScale = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnSet = new System.Windows.Forms.Button();
             this.chart = new ChartControl.Chart();
             this.pnlChart.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -62,7 +61,6 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.btnSet);
             this.groupBox1.Controls.Add(this.lblMinimum);
             this.groupBox1.Controls.Add(this.lblMaximum);
             this.groupBox1.Controls.Add(this.lblAverage);
@@ -138,7 +136,7 @@
             // 
             this.btnResetStats.Location = new System.Drawing.Point(103, 41);
             this.btnResetStats.Name = "btnResetStats";
-            this.btnResetStats.Size = new System.Drawing.Size(130, 32);
+            this.btnResetStats.Size = new System.Drawing.Size(81, 23);
             this.btnResetStats.TabIndex = 3;
             this.btnResetStats.Text = "Reset Statistics";
             this.btnResetStats.UseVisualStyleBackColor = true;
@@ -165,11 +163,16 @@
             0,
             0,
             0});
+            this.nupXScale.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.nupXScale.Name = "nupXScale";
             this.nupXScale.Size = new System.Drawing.Size(120, 20);
             this.nupXScale.TabIndex = 1;
             this.nupXScale.Value = new decimal(new int[] {
-            2,
+            3,
             0,
             0,
             0});
@@ -185,15 +188,6 @@
             this.label1.Text = "X Values:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnSet
-            // 
-            this.btnSet.Location = new System.Drawing.Point(190, 16);
-            this.btnSet.Name = "btnSet";
-            this.btnSet.Size = new System.Drawing.Size(43, 23);
-            this.btnSet.TabIndex = 10;
-            this.btnSet.Text = "Set";
-            this.btnSet.UseVisualStyleBackColor = true;
-            // 
             // chart
             // 
             this.chart.AutoAdjusting = true;
@@ -203,7 +197,7 @@
             this.chart.Name = "chart";
             this.chart.Size = new System.Drawing.Size(462, 297);
             this.chart.TabIndex = 0;
-            this.chart.ValueMargin = 2;
+            this.chart.ValueMargin = 2F;
             this.chart.XValues = 211;
             // 
             // frmStats
@@ -238,6 +232,5 @@
         private System.Windows.Forms.Label lblAverage;
         private System.Windows.Forms.Label label4;
         private ChartControl.Chart chart;
-        private System.Windows.Forms.Button btnSet;
     }
 }

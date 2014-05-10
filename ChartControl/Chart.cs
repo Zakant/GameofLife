@@ -31,7 +31,7 @@ namespace ChartControl
         public int XValues { get; set; }
 
         [Browsable(true)]
-        public int ValueMargin { get; set; }
+        public float ValueMargin { get; set; }
 
         public Chart()
         {
@@ -120,7 +120,7 @@ namespace ChartControl
             }
             else
             {
-                ValueMargin = (int)((this.Size.Width - leftmargin - rightmargin) / XValues);
+                ValueMargin = ((float)((this.Size.Width - leftmargin - rightmargin)) / (XValues - 1));
             }
 
         }
