@@ -18,8 +18,8 @@ namespace ChartControl
         private int topmargin = 20;
         private int botmargin = 20;
 
+        private Font f = new Font("Segoe UI", 8, FontStyle.Regular, GraphicsUnit.Point);
 
-        private float valuemargin = 2;
 
         [Browsable(true)]
         public ChartMode Mode { get; set; }
@@ -30,13 +30,16 @@ namespace ChartControl
         [Browsable(true)]
         public int XValues { get; set; }
 
+        [Browsable(true)]
+        public float ValueMargin { get; set; }
 
         public Chart()
         {
             Mode = ChartMode.Scrolling;
+            ValueMargin = 2;
             AutoAdjusting = true;
             if (AutoAdjusting)
-                XValues = (int)((this.Size.Width - leftmargin - rightmargin) / valuemargin);
+                XValues = (int)((this.Size.Width - leftmargin - rightmargin) / ValueMargin);
             _chartpaths.PropertyChanged += HandlePropertyChanged;
             this.DoubleBuffered = true;
         }
@@ -66,6 +69,7 @@ namespace ChartControl
         void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             CalculateYBoarder();
+            CalculateMargins();
             UpdateData();
             this.Refresh();
         }
@@ -74,7 +78,7 @@ namespace ChartControl
         protected override void OnSizeChanged(EventArgs e)
         {
             if (AutoAdjusting)
-                XValues = (int)((this.Size.Width - leftmargin - rightmargin) / valuemargin);
+                XValues = (int)((this.Size.Width - leftmargin - rightmargin) / ValueMargin);
             CalculateYBoarder();
             base.OnSizeChanged(e);
         }
@@ -107,6 +111,16 @@ namespace ChartControl
             }
         }
 
+
+        protected void CalculateMargins()
+        {
+            using (System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(new Bitmap(1, 1)))
+            {
+                SizeF size = graphics.MeasureString(yboarder.ToString(), f);
+                leftmargin = (int)(3 + size.Width + 3);
+            }
+        }
+
         private DataEntry[] _data = new DataEntry[0];
         protected void UpdateData()
         {
@@ -121,7 +135,7 @@ namespace ChartControl
                         case ChartMode.Scrolling:
                             PointF[] projektion = data.Select(new Func<ChartPointF, int, PointF>((p, i) =>
                                 {
-                                    return new PointF((this.Width - rightmargin) - valuemargin * i, (1.0f - p.Y / yboarder) * (this.Height - topmargin - botmargin) + topmargin);
+                                    return new PointF((this.Width - rightmargin) - ValueMargin * i, (1.0f - p.Y / yboarder) * (this.Height - topmargin - botmargin) + topmargin);
                                 })).ToArray();
                             _datatemp.Add(new DataEntry() { points = projektion, color = path.Color });
                             break;
@@ -134,11 +148,20 @@ namespace ChartControl
         }
 
         private Brush bwhite = new SolidBrush(Color.White);
+        private Brush bblack = new SolidBrush(Color.Black);
 
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+
+            g.DrawString(yboarder.ToString(), f, bblack, new PointF(3, topmargin - g.MeasureString(yboarder.ToString(), f).Height / 2));
+            string middel = ((int)(yboarder / 2)).ToString();
+            g.DrawString(middel, f, bblack, new PointF(3, (this.Height - topmargin - botmargin) / 2 - g.MeasureString(middel, f).Height / 2));
+            g.DrawString("0", f, bblack, new PointF(3, this.Height - botmargin - g.MeasureString("0", f).Height / 2));
+
+
 
             foreach (var d in _data)
             {
@@ -153,15 +176,14 @@ namespace ChartControl
         {
             //if (repaintbackground)
             //{
-                Graphics g = e.Graphics;
-                g.FillRectangle(bwhite, e.ClipRectangle); // Hintergrund weiß machen
+            Graphics g = e.Graphics;
+            g.FillRectangle(bwhite, e.ClipRectangle); // Hintergrund weiß machen
 
-                //X-Achse
-                g.DrawLine(pblack, new Point(leftmargin, topmargin), new Point(leftmargin, e.ClipRectangle.Height - botmargin));
-                //Y-Achse
-                g.DrawLine(pblack, new Point(leftmargin, e.ClipRectangle.Height - botmargin), new Point(e.ClipRectangle.Width - rightmargin, e.ClipRectangle.Height - botmargin));
-
-                repaintbackground = false;
+            //X-Achse
+            g.DrawLine(pblack, new Point(leftmargin, topmargin), new Point(leftmargin, e.ClipRectangle.Height - botmargin));
+            //Y-Achse
+            g.DrawLine(pblack, new Point(leftmargin, e.ClipRectangle.Height - botmargin), new Point(e.ClipRectangle.Width - rightmargin, e.ClipRectangle.Height - botmargin));
+            repaintbackground = false;
             //}
         }
 
