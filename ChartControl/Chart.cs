@@ -58,7 +58,7 @@ namespace ChartControl
             _chartpaths.Remove(path);
         }
 
-        public IEnumerator<ChartPathF> getFEnumerator()
+        public IEnumerator<ChartPathF> getEnumerator()
         {
             return _chartpaths.GetEnumerator();
         }
@@ -91,13 +91,13 @@ namespace ChartControl
                     List<ChartPointF> _temp = new List<ChartPointF>();
                     foreach (var c in _chartpaths)
                     {
-                        foreach (var i in c.OrderByDescending(new Func<ChartPointF, float>(x => x.X)).Take(XValues))
+                        foreach (var i in c.OrderByDescending((x => x.X)).Take(XValues))
                         {
                             _temp.Add(i);
                         }
                     }
                     if (_temp.Count > 0)
-                        yboarder = (int)_temp.Max(new Func<ChartPointF, float>(x => x.Y)) + 5;
+                        yboarder = (int)_temp.Max((x => x.Y)) + 5;
                     break;
                 case ChartMode.Static:
                     List<ChartPointF> _temp2 = new List<ChartPointF>();
@@ -105,7 +105,7 @@ namespace ChartControl
                         foreach (var i in c)
                             _temp2.Add(i);
                     if (_temp2.Count > 0)
-                        yboarder = (int)_temp2.Max(new Func<ChartPointF, float>(x => x.Y)) + 5;
+                        yboarder = (int)_temp2.Max((x => x.Y)) + 5;
                     break;
             }
         }
@@ -141,16 +141,16 @@ namespace ChartControl
             List<DataEntry> _datatemp = new List<DataEntry>();
             foreach (var path in _chartpaths)
             {
-                ChartPointF[] data = path.OrderByDescending(new Func<ChartPointF, float>(x => x.X)).Take(XValues).ToArray();
+                ChartPointF[] data = path.OrderByDescending(x => x.X).Take(XValues).ToArray();
                 if (data.Length > 0)
                 {
                     switch (Mode)
                     {
                         case ChartMode.Scrolling:
-                            PointF[] projektion = data.Select(new Func<ChartPointF, int, PointF>((p, i) =>
+                            PointF[] projektion = data.Select((p, i) =>
                                 {
                                     return new PointF((this.Width - rightmargin) - ValueMargin * i, (1.0f - p.Y / yboarder) * (this.Height - topmargin - botmargin) + topmargin);
-                                })).ToArray();
+                                }).ToArray();
                             _datatemp.Add(new DataEntry() { points = projektion, color = path.Color });
                             break;
                         case ChartMode.Static:
