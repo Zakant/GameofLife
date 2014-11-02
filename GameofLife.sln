@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameofLife", "GameofLife\GameofLife.csproj", "{B1D8B451-4EA0-4FFF-AD1A-49B0653A502B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartControl", "ChartControl\ChartControl.csproj", "{770E7113-8716-473E-9464-0D2499B36945}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,10 @@ Global
 		{B1D8B451-4EA0-4FFF-AD1A-49B0653A502B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1D8B451-4EA0-4FFF-AD1A-49B0653A502B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1D8B451-4EA0-4FFF-AD1A-49B0653A502B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{770E7113-8716-473E-9464-0D2499B36945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{770E7113-8716-473E-9464-0D2499B36945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{770E7113-8716-473E-9464-0D2499B36945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{770E7113-8716-473E-9464-0D2499B36945}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
