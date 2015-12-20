@@ -166,6 +166,7 @@ namespace ChartControl
 
         protected override void OnPaint(PaintEventArgs e)
         {
+            if (isDesignMode()) return;
             Graphics g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
@@ -188,6 +189,10 @@ namespace ChartControl
         protected bool repaintbackground = true;
         protected override void OnPaintBackground(PaintEventArgs e)
         {
+            if(isDesignMode())
+            {
+                e.Graphics.FillRectangle(bwhite, e.ClipRectangle); // Hintergrund weiß machen
+            }
             //if (repaintbackground)
             //{
             Graphics g = e.Graphics;
@@ -215,6 +220,11 @@ namespace ChartControl
         {
             public PointF[] points;
             public Color color;
+        }
+
+        private static bool isDesignMode()
+        {
+            return (LicenseManager.UsageMode == LicenseUsageMode.Designtime);
         }
     }
 }
