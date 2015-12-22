@@ -54,6 +54,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Code\BitFieldEntry.cs" />
+    <Compile Include="Code\BitFieldExtension.cs" />
     <Compile Include="Code\Simulation\IRuleSet.cs" />
     <Compile Include="Code\Simulation\ISimulationUnit.cs" />
     <Compile Include="Code\Simulation\SimulationUnit.cs" />

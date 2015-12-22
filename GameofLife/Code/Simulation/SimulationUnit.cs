@@ -23,7 +23,8 @@ namespace GameofLife.Code.Simulation
         public void computeTickInPlace(BitField field)
         {
             foreach (var entry in field.getAllEntries())
-                field[entry.Point] = RuleSet.StatusChanges[getLivingNeighbours(entry.Point.X, entry.Point.Y, field)];
+                field.WriteBuffer(entry.Point, RuleSet.StatusChanges[getLivingNeighbours(entry.Point.X, entry.Point.Y, field)]);
+            field.FlushBuffer();
         }
 
 
