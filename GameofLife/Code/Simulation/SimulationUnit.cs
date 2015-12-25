@@ -9,21 +9,21 @@ namespace GameofLife.Code.Simulation
 {
     public class SimulationUnit : ISimulationUnit
     {
-        public IRuleSet RuleSet { get; set; }
+        public RuleSet RuleSet { get; set; }
 
         public bool Torus { get; set; }
 
-        public BitField computeTick(BitField field)
+        public BitField Simulate(BitField field)
         {
             var newField = field.Clone();
-            computeTickInPlace(newField);
+            SimulateInPlace(newField);
             return newField;
         }
 
-        public void computeTickInPlace(BitField field)
+        public void SimulateInPlace(BitField field)
         {
             foreach (var entry in field.getAllEntries())
-                field.WriteBuffer(entry.Point, RuleSet.StatusChanges[getLivingNeighbours(entry.Point.X, entry.Point.Y, field)]);
+                field.WriteBuffer(entry.Point, RuleSet.isAlive(getLivingNeighbours(entry.Point.X, entry.Point.Y, field)));
             field.FlushBuffer();
         }
 

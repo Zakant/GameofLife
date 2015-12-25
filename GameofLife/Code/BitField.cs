@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -45,6 +46,11 @@ namespace GameofLife.Code
         public byte[] Identity
         {
             get { return _id = _isDirty ? CalculateIdentity() : _id; }
+        }
+
+        public bool isNullField
+        {
+            get { lock (_lock) { return _data.All(x => x == 0); } }
         }
 
         public BitField(int width, int height)

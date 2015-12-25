@@ -11,7 +11,6 @@ namespace GameofLife
 {
     public partial class frmMain : Form
     {
-        Zelle[,] zellen = new Zelle[0, 0];
         bool isGameRunning = false;
         bool supressNUPValueChange = false;
         Timer t;
@@ -30,39 +29,17 @@ namespace GameofLife
             this.DoubleBuffered = true;
             canvas.Blocks = false;
             UpdateArray();
-            canvas.Zellen = zellen;
+            // canvas.Zellen = zellen;
             canvas.Refresh();
         }
 
         public void Tick()
         {
-            System.Drawing.Region r = new System.Drawing.Region();
-            int living = 0;
-            var ruleset = ((RuleSet)cbRuleSet.SelectedItem);
-            for (int x = 0; x <= zellen.GetUpperBound(0); x++)
-            {
-                for (int y = 0; y <= zellen.GetUpperBound(1); y++)
-                {
-                    zellen[x, y].Aenderung = ruleset.applyRuleset(zellen[x, y].Status, getLivingNeighbours(x, y));
-                }
-            }
-             
-            for (int x = 0; x <= zellen.GetUpperBound(0); x++)
-            {
-                for (int y = 0; y <= zellen.GetUpperBound(1); y++)
-                {
-                    if (zellen[x, y].Status != zellen[x, y].Aenderung)
-                    {
-                        zellen[x, y].hasChanged = true;
-                        zellen[x, y].Status = zellen[x, y].Aenderung;
-                        r.Union(canvas.getRectangle(x, y));
-                    }
-                    living += zellen[x, y].Status == ZellenStatus.Lebt ? 1 : 0;
-                }
-            }
+ 
+
+
             ticks++;
             lblTicks.Text = ticks.ToString();
-            lblLivingCells.Text = living.ToString();
             canvas.Invalidate(r);
             if (cbLimit.Checked && ticks >= nupLimit.Value)
             {
@@ -449,52 +426,6 @@ namespace GameofLife
         #endregion
 
         #region Helper
-
-        private int getLivingNeighbours(int x, int y)
-        {
-            int sum = 0;
-            int xbound = zellen.GetUpperBound(0);
-            int ybound = zellen.GetUpperBound(1);
-            if (!cbTorus.Checked)
-            {
-                sum += x - 1 >= 0 && y - 1 >= 0 && x - 1 <= xbound && y - 1 <= ybound && zellen[x - 1, y - 1].Status == ZellenStatus.Lebt ? 1 : 0;
-                sum += x >= 0 && y - 1 >= 0 && x <= xbound && y - 1 <= ybound && zellen[x, y - 1].Status == ZellenStatus.Lebt ? 1 : 0;
-                sum += x + 1 >= 0 && y - 1 >= 0 && x + 1 <= xbound && y - 1 <= ybound && zellen[x + 1, y - 1].Status == ZellenStatus.Lebt ? 1 : 0;
-
-                sum += x - 1 >= 0 && y >= 0 && x - 1 <= xbound && y <= ybound && zellen[x - 1, y].Status == ZellenStatus.Lebt ? 1 : 0;
-                sum += x + 1 >= 0 && y >= 0 && x + 1 <= xbound && y <= ybound && zellen[x + 1, y].Status == ZellenStatus.Lebt ? 1 : 0;
-
-                sum += x - 1 >= 0 && y + 1 >= 0 && x - 1 <= xbound && y + 1 <= ybound && zellen[x - 1, y + 1].Status == ZellenStatus.Lebt ? 1 : 0;
-                sum += x >= 0 && y + 1 >= 0 && x <= xbound && y + 1 <= ybound && zellen[x, y + 1].Status == ZellenStatus.Lebt ? 1 : 0;
-                sum += x + 1 >= 0 && y + 1 >= 0 && x + 1 <= xbound && y + 1 <= ybound && zellen[x + 1, y + 1].Status == ZellenStatus.Lebt ? 1 : 0;
-            }
-            else
-            {
-                List<Point> points = new List<Point>();
-
-                points.Add(new Point(getLimitNumber(x - 1, xbound), getLimitNumber(y - 1, ybound)));
-                points.Add(new Point(getLimitNumber(x, xbound), getLimitNumber(y - 1, ybound)));
-                points.Add(new Point(getLimitNumber(x + 1, xbound), getLimitNumber(y - 1, ybound)));
-
-                points.Add(new Point(getLimitNumber(x - 1, xbound), getLimitNumber(y, ybound)));
-                points.Add(new Point(getLimitNumber(x + 1, xbound), getLimitNumber(y, ybound)));
-
-                points.Add(new Point(getLimitNumber(x - 1, xbound), getLimitNumber(y + 1, ybound)));
-                points.Add(new Point(getLimitNumber(x, xbound), getLimitNumber(y + 1, ybound)));
-                points.Add(new Point(getLimitNumber(x + 1, xbound), getLimitNumber(y + 1, ybound)));
-
-                foreach (var p in points)
-                    sum += zellen[p.X, p.Y].Status == ZellenStatus.Lebt ? 1 : 0;
-            }
-            return sum;
-        }
-
-        private int getLimitNumber(int number, int max)
-        {
-            number = number < 0 ? max - number - 1 : number;
-            number = number > max ? number % (max + 1) : number;
-            return number;
-        }
 
         private void LoadRuleSets()
         {

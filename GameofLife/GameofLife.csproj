@@ -49,14 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\Analyse\AnalyseResult.cs" />
+    <Compile Include="Code\Analyse\CyclusAnalyser.cs" />
     <Compile Include="Code\BitField.cs" />
     <Compile Include="CanvasPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Code\BitFieldEntry.cs" />
     <Compile Include="Code\BitFieldExtension.cs" />
-    <Compile Include="Code\Simulation\IRuleSet.cs" />
+    <Compile Include="Code\Simulation\RuleSet.cs" />
     <Compile Include="Code\Simulation\ISimulationUnit.cs" />
+    <Compile Include="Code\Simulation\SimulationExtension.cs" />
     <Compile Include="Code\Simulation\SimulationUnit.cs" />
     <Compile Include="Code\TrackingBitField.cs" />
     <Compile Include="frmMain.cs">
@@ -141,9 +144,7 @@
       <Name>ChartControl</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Code\Analyse\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(ProjectDir)tools\PostBuildZipper.exe" "$(ProjectDir)$(OutDir)\" "$(ConfigurationName)"</PostBuildEvent>

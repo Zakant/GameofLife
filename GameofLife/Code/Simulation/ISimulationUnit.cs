@@ -9,11 +9,11 @@ namespace GameofLife.Code.Simulation
     public interface ISimulationUnit
     {
 
-        IRuleSet RuleSet { get; set; }
+        RuleSet RuleSet { get; set; }
         bool Torus { get; set; }
 
-        BitField computeTick(BitField field);
+        BitField Simulate(BitField field);
 
-        void computeTickInPlace(BitField field);
+        void SimulateInPlace(BitField field);
     }
 }
